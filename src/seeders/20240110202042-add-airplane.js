@@ -1,4 +1,5 @@
 'use strict';
+ const {Op} = require('sequelize')
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -12,6 +13,21 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+
+    await queryInterface.bulkInsert('airplanes',[
+      {
+        modelNUmber : 'airbus340',
+        capacity : 900,
+        createdAt : new Date(),
+        updatedAt : new Date()
+      },
+      {
+        modelNUmber : 'airbus380',
+        capacity : 450,
+        createdAt : new Date(),
+        updatedAt : new Date()
+      }
+    ])
   },
 
   async down (queryInterface, Sequelize) {
@@ -21,5 +37,11 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+
+    await queryInterface.bulkDelete('airplanes',  {
+      [Op.or] : [
+        {modelNUmber : 'airbus380'},{modelNUmber : 'airbus340'}
+      ]
+    });
   }
 };
