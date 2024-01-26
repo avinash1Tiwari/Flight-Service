@@ -256,6 +256,9 @@ class crudRepository {
                     id: data
                 }
             });
+            if(!response){
+                throw new AppError("The airplane you want to delete is not present or already deleted",StatusCodes.NOT_FOUND)
+            }
             return response;
     }
 

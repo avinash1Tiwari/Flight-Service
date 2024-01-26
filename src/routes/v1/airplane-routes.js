@@ -33,6 +33,10 @@ router.get('/:id',AirplaneController.getAirplane)
 
 
 
+//   /api/v1/airplanes/id   DELETE
+// req body = {}
+router.delete('/:id',AirplaneController.destroyAirplane)
 
+// abcd
 
 module.exports = router;

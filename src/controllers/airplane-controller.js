@@ -207,8 +207,36 @@ async function getAirplane(req,res){
     }
 }
 
+
+
+// destroy a perticular airplane
+async function destroyAirplane(req,res){
+    try{
+
+        const airplane = await AirplaneServices.DestroyAirplane(req.params.id);
+        SuccessResponse.data = airplane;
+
+        return res
+                  .status(StatusCodes.OK)
+                  .json(SuccessResponse)
+    }
+    catch(error){
+        console.log(error.statusCode)
+
+            ErrorResponse.error = error;
+            return res
+                    .status(error.statusCode)
+                    .json(ErrorResponse);
+    }
+}
+
+
+
+
+
 module.exports = {
     createAirplane,
     getAirplanes,
-    getAirplane
+    getAirplane,
+    destroyAirplane
 }

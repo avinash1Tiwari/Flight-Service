@@ -91,8 +91,27 @@ async function getAirplane(id){
 
 
 
+async function DestroyAirplane(id){
+    try{
+
+        const airplanes = await airplanerepository.destroy(id);
+        return airplanes;
+    }
+    catch(error){
+        if(error.statusCode == StatusCodes.NOT_FOUND)
+        {
+            throw new AppError("The airplane you want to delete is not present OR deleted already",error.statusCode)
+        }
+        throw new AppError("Can not fetch the data of all airplanes ",StatusCodes.INTERNAL_SERVER_ERROR)
+
+    }
+}
+
+
+
 module.exports ={
     createAirplaneA,
     getAirplanes,
-    getAirplane
+    getAirplane,
+    DestroyAirplane
 }
