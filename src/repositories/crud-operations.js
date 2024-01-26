@@ -115,7 +115,119 @@
 
 
 
+// const { Logger } = require('../config');
+// // const { response } = require('express');
+// // const { error } = require('winston');
+
+// // making constructor
+
+// class crudRepository {
+
+//     constructor(model) {
+//         this.model = model;
+//     }
+
+
+//     async create(data) {
+
+//         const response = await this.model.create(data);
+//             return response;
+
+//     }
+
+
+//     // destroy from model where id == data;, just like 'WHERE' in SQL
+//     async destroy(data) {
+//         try {
+
+//             const response = await this.model.destroy({
+//                 where: {
+//                     id: data
+//                 }
+//             });
+//             return response;
+//         }
+//         catch (error) {
+//             Logger.error("Something went wrong on the crud Repo : destroy");
+//             throw error;
+
+//         }
+//     }
+
+
+
+//     // select * from airplane where primary key = data;
+
+//     async get(data) {
+
+//         try {
+//             const response = await this.model.findByPk(data);
+//             return response;
+//         }
+//         catch (error) {
+//             Logger.error("Something went wrong on the crud Repo : get");
+//             throw error;
+
+//         }
+
+//     }
+
+//     //    select *
+
+//     async getAll() {
+//         try {
+//             const response = await this.model.findByAll();
+//             return response;
+//         }
+//         catch (error) {
+//             Logger.error("Something went wrong on the crud Repo : getAll ");
+//             throw error;
+
+//         }
+//     }
+
+
+//     // update
+//     // data is an oject like -> {col:val, ......}
+
+//     async update(id, data) {
+//         try {
+//             const response = await this.model.update(data, {
+//                 where: {
+//                     id: id
+//                 }
+//             });
+//             return response;
+//         }
+//         catch (error) {
+//             Logger.error("Something went wrong on the crud Repo : update ");
+//             throw error;
+
+//         }
+//     }
+
+
+// }
+
+
+// module.exports = crudRepository;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const {StatusCodes} = require('http-status-codes')
 const { Logger } = require('../config');
+const AppError = require('../utils/errors/app-error');
 // const { response } = require('express');
 // const { error } = require('winston');
 
@@ -137,21 +249,14 @@ class crudRepository {
 
 
     // destroy from model where id == data;, just like 'WHERE' in SQL
-    async destroy(data) {
-        try {
-
+    async destroy(data)
+     {
             const response = await this.model.destroy({
                 where: {
                     id: data
                 }
             });
             return response;
-        }
-        catch (error) {
-            Logger.error("Something went wrong on the crud Repo : destroy");
-            throw error;
-
-        }
     }
 
 
@@ -160,30 +265,18 @@ class crudRepository {
 
     async get(data) {
 
-        try {
             const response = await this.model.findByPk(data);
+            if(!response){
+                throw new AppError("Not able to find the required resource",StatusCodes.NOT_FOUND)
+            }
             return response;
-        }
-        catch (error) {
-            Logger.error("Something went wrong on the crud Repo : get");
-            throw error;
-
-        }
-
     }
 
     //    select *
 
     async getAll() {
-        try {
-            const response = await this.model.findByAll();
+            const response = await this.model.findAll();
             return response;
-        }
-        catch (error) {
-            Logger.error("Something went wrong on the crud Repo : getAll ");
-            throw error;
-
-        }
     }
 
 
@@ -191,7 +284,6 @@ class crudRepository {
     // data is an oject like -> {col:val, ......}
 
     async update(id, data) {
-        try {
             const response = await this.model.update(data, {
                 where: {
                     id: id
@@ -199,14 +291,6 @@ class crudRepository {
             });
             return response;
         }
-        catch (error) {
-            Logger.error("Something went wrong on the crud Repo : update ");
-            throw error;
-
-        }
-    }
-
-
 }
 
 

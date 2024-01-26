@@ -134,8 +134,6 @@ async function createAirplane(req,res) {
 
 
         try{
-            
-
             // const airplane = req.body.modelNumber + req.body.capacity;
             const airplane = await AirplaneServices.createAirplaneA({
                 modelNumber : req.body.modelNumber,
@@ -162,6 +160,55 @@ async function createAirplane(req,res) {
    
 }
 
+
+
+
+// get all airplanes
+async function getAirplanes(req,res){
+    try{
+
+        const airplanes = await AirplaneServices.getAirplanes();
+        SuccessResponse.data = airplanes;
+
+        return res
+                  .status(StatusCodes.OK)
+                  .json(SuccessResponse)
+    }
+    catch(error){
+        console.log(error.statusCode)
+
+            ErrorResponse.error = error;
+            return res
+                    .status(error.statusCode)
+                    .json(ErrorResponse);
+    }
+}
+
+
+
+// get only one airplane
+async function getAirplane(req,res){
+    try{
+
+        const airplane = await AirplaneServices.getAirplane(req.params.id);
+        SuccessResponse.data = airplane;
+
+        return res
+                  .status(StatusCodes.OK)
+                  .json(SuccessResponse)
+    }
+    catch(error){
+        console.log(error.statusCode)
+
+            ErrorResponse.error = error;
+            return res
+                    .status(error.statusCode)
+                    .json(ErrorResponse);
+    }
+}
+
 module.exports = {
     createAirplane,
+    getAirplanes,
+    getAirplane
 }
