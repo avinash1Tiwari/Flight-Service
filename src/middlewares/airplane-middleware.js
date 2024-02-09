@@ -46,7 +46,7 @@ function validateCreateRequest(req,res,next) {
 
         // ErrorResponse.error =  "modle not not found in the incomming request "
 
-        ErrorResponse.error = new AppError(["modle not not found in the incomming request "],StatusCodes.BAD_REQUEST)
+        ErrorResponse.error = new AppError(["model name not found in the incomming request "],StatusCodes.BAD_REQUEST)
 
 
 

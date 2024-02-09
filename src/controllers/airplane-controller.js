@@ -131,6 +131,8 @@ const{ErrorResponse,SuccessResponse} = require('../utils/common')
 
 async function createAirplane(req,res) {
 
+            // POST : /airplane
+            // req.body : modelNumber : "airbus233" , capacity : 400
 
 
         try{
@@ -231,6 +233,30 @@ async function destroyAirplane(req,res){
 }
 
 
+async function updateAirplane(req,res){
+    try{
+        console.log("aa gye")
+
+        const airplane = await AirplaneServices.UpdateAirplane(req.params.id,{
+            modelNumber : req.body.modelNumber,
+            capacity : req.body.capacity
+        });
+        SuccessResponse.data = airplane;
+
+        return res
+                  .status(StatusCodes.OK)
+                  .json(SuccessResponse)
+    }
+    catch(error){
+        console.log(error.statusCode)
+
+            ErrorResponse.error = error;
+            return res
+                    .status(error.statusCode)
+                    .json(ErrorResponse);
+    }
+}
+
 
 
 
@@ -238,5 +264,6 @@ module.exports = {
     createAirplane,
     getAirplanes,
     getAirplane,
-    destroyAirplane
+    destroyAirplane,
+    updateAirplane
 }

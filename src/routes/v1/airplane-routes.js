@@ -37,6 +37,9 @@ router.get('/:id',AirplaneController.getAirplane)
 // req body = {}
 router.delete('/:id',AirplaneController.destroyAirplane)
 
-// abcd
+//  /api/v1/airplanes/id   PATCH
+// req body =  req body = {modelNumber : 'airbus234' , capacity : 300}
+
+router.patch('/:id',AirplaneController.updateAirplane)
 
 module.exports = router;
