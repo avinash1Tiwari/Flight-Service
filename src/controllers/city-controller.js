@@ -109,6 +109,7 @@ async function updateCity(req,res){
             name : req.body.name,
         });
         SuccessResponse.data = city;
+        console.log(SuccessResponse)
 
         return res
                   .status(StatusCodes.OK)

@@ -243,9 +243,8 @@ class crudRepository {
     async create(data) {
         console.log("data : " +data )
         const response = await this.model.create(data);
-        console.log("response : "+ response)
+       
             return response;
-
     }
 
 
@@ -293,6 +292,8 @@ class crudRepository {
                     id: id
                 }
             });
+            console.log("response from update service  =>" + response)
+            console.log("data =>" + data)
             return response;
         }
 }
