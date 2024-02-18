@@ -19,6 +19,8 @@ app.listen(ServerConfig.PORT, async () => {
     console.log(`Successfully started the server on PORT : ${ServerConfig.PORT}`);
     const {cities,airports} = require('./models')
 
+    // bad code
+
     // const city = await cities.findByPk(1);
     // console.log("city value => " + city.name)
 
@@ -39,10 +41,10 @@ app.listen(ServerConfig.PORT, async () => {
 
 
 
-    await cities.destroy({
-        where : {
-            id:2
-        }
+    // await cities.destroy({
+    //     where : {
+    //         id:2
+    //     }
     })
 
 
