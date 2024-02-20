@@ -11,46 +11,23 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      
     }
   }
   Airplane.init({
     modelNumber: {
-      type : DataTypes.STRING,
-    allowNull:false,
-  
-  },
-
-  modelNumber: {
-    type : DataTypes.STRING,
-  allowNull:false,
-
-  validate : {
-    isAlphanumeric: true,
-    len: [5, 15]
-  },
-  unique:true
-
-},
-    // capacity: {
-    //   type : DataTypes.INTEGER,
-    //   allowNull:false,
-    //   defaultValue : 0 
-    // }
-    capacity: {
-      type : DataTypes.INTEGER,
+      type: DataTypes.STRING,
+      allowNull:false,
+    },
+    capacity:  {
+      type: DataTypes.INTEGER,
       allowNull:false,
       defaultValue : 0,
       validate : {
         max : 1000
-      }
-    }
-  }, 
-  
-  {
+      }  
+  }}, {
     sequelize,
-    modelName: 'Airplane',
+    modelName: 'airplanes',
   });
-  
   return Airplane;
 };

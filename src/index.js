@@ -19,7 +19,7 @@ app.listen(ServerConfig.PORT, async () => {
     console.log(`Successfully started the server on PORT : ${ServerConfig.PORT}`);
     const {cities,airports} = require('./models')
 
-    // bad code
+    // bad code, implementing the request directly with the help of sequelize inbuilt functions
 
     // const city = await cities.findByPk(1);
     // console.log("city value => " + city.name)
@@ -51,4 +51,4 @@ app.listen(ServerConfig.PORT, async () => {
 
 
 
-});
+
