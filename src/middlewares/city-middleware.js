@@ -11,7 +11,7 @@ function validateCreateRequest(req,res,next) {
 
     if(!req.body.name){
         // if you want to customize the response and error format do like below
-        ErrorResponse.messsage = "something went wrong while  creating an airplane",
+        ErrorResponse.message = "something went wrong while  creating an airplane",
         // ErrorResponse.error = {explaination : "modle not not found in the incomming request "}
 
         // ErrorResponse.error =  "modle not not found in the incomming request "
