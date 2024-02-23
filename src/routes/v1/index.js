@@ -8,6 +8,8 @@ const airportRoutes = require('./airport-routes')
 
 const cityRoutes = require('./city-routes')
 
+const flightRoutes = require('./flight-routes')
+
 const router = express.Router();
 
 router.use('/airplanes',airplaneRoutes);
@@ -15,8 +17,11 @@ router.use('/airplanes',airplaneRoutes);
 router.use('/cities',cityRoutes)
 
 
+router.use('/flights',flightRoutes)
+
+
 router.use('/airports',airportRoutes)
 
-router.get('/info', InfoController.info);
+router.get('/info', InfoController.info)
 
 module.exports = router;
