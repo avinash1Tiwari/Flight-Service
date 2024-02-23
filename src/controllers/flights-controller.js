@@ -2,6 +2,10 @@ const {StatusCodes} = require('http-status-codes');
 const {FlightServices} = require('../services');
 const{ErrorResponse,SuccessResponse} = require('../utils/common')
 
+
+
+
+
 async function createFlight(req,res) {
     //   /api/v1/flights   POST
    // req body = 
@@ -14,8 +18,9 @@ async function createFlight(req,res) {
          + " " + req.body.DepartureTime + " " 
         + req.body.Price + " " + req.body.BoardingGate + " " 
         + req.body.TotalSeats )
+
     
-        const city = await FlightServices.createFlight({
+        const flight = await FlightServices.createFlight({
             FightNumber : req.body.FightNumber,
             AirplaneId : req.body.AirplaneId,
             DepartureAirportId : req.body.DepartureAirportId,
@@ -27,7 +32,7 @@ async function createFlight(req,res) {
             TotalSeats : req.body.TotalSeats,
         });
     
-        SuccessResponse.data = city;
+        SuccessResponse.data = flight;
         return res
                 .status(StatusCodes.CREATED)
                 .json(SuccessResponse);

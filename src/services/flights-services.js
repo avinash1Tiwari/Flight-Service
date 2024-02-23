@@ -2,6 +2,8 @@ const { StatusCodes } = require('http-status-codes');
 const { FlightRepository} = require('../repositories')
 const AppError = require('../utils/errors/app-error')
 
+
+
 const flighttrepository = new FlightRepository();
 
 
@@ -10,9 +12,11 @@ async function createFlight(data) {
     try{
 
         console.log("inside Service  datA : " + data)
+        
 
-        const flight = await flighttrepository.create(data);
-        return flight; 
+            const flight = await flighttrepository.create(data);
+            return flight; 
+        
        
     }
     catch(error)
