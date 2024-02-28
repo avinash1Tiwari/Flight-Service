@@ -23,5 +23,10 @@ router.post('/',
 
 
 
+//    /api/v1/flights?trips='DEL-VZG'   GET
+
+// we write trips in "params" in postman
+ router.get('/',FlightController.getAllFlights);
+
 module.exports = router;
 

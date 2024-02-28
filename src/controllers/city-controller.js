@@ -36,7 +36,7 @@ async function createCity(req,res) {
 // get all cities
 async function getCities(req,res){
     try{
-
+        
         const cities = await CityService.getCities();
         SuccessResponse.data = cities;
 

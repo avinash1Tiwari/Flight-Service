@@ -131,9 +131,6 @@ const{ErrorResponse,SuccessResponse} = require('../utils/common')
 
 async function createAirplane(req,res) {
 
-            // POST : /airplane
-            // req.body : modelNumber : "airbus233" , capacity : 400
-
 
         try{
             // const airplane = req.body.modelNumber + req.body.capacity;
@@ -177,6 +174,7 @@ async function getAirplanes(req,res){
                   .json(SuccessResponse)
     }
     catch(error){
+        
         console.log(error.statusCode)
 
             ErrorResponse.error = error;

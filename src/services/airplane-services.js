@@ -62,12 +62,12 @@ async function createAirplaneA(data) {
 
 async function getAirplanes(){
     try{
-
+        
         const airplanes = await airplanerepository.getAll();
         return airplanes;
     }
     catch(error){
-
+        console.log("error bhai : => "+ error)
         throw new AppError("Can not fetch the data of all airplanes ",StatusCodes.INTERNAL_SERVER_ERROR)
 
     }
