@@ -1,4 +1,4 @@
-const {Flights,airplanes,airports} = require('../models');
+const {Flights,airplanes,airports,cities} = require('../models');
 
 const {Sequelize} = require('sequelize')
 const crudRepository = require('./crud-operations');
@@ -82,6 +82,94 @@ class FlightRepository extends crudRepository{
 
 
     // 4. 
+    // async getAllFlights(filter,sort) {
+
+    //     console.log("Filter in repository:", filter);
+    //     const response = await Flights.findAll({
+    //         where: filter,
+    //         order : sort,
+    //         include :[
+    //             {
+    //             model:airplanes,
+    //             required : true,
+                
+    //             },
+
+
+                // this issue is comming
+    //             {
+    //                 model: airports,
+    //                 required: true,
+    //                 On: {
+    //                    col1 : Sequelize.where(Sequelize.col("Flights.DepartureAirportId"),"=",Sequelize.col("airports.code"))
+    //                 },
+                   
+    //             }
+    //     ]
+
+    //     });
+
+    //     console.log( "response :=>" + response.toString());
+
+    //     return response;
+
+        
+    // }
+
+
+
+
+
+    // 5. after adding allias
+    // async getAllFlights(filter,sort) {
+
+    //     console.log("Filter in repository:", filter);
+    //     const response = await Flights.findAll({
+    //         where: filter,
+    //         order : sort,
+    //         include :[
+    //             {
+    //             model:airplanes,
+    //             required : true,
+    //             as:'airplanes_details'
+    //             },
+
+
+    //             {
+    //                 model: airports,
+    //                 required: true,
+    //                 as:'departure_airport',
+    //                 On: {
+    //                    col1 : Sequelize.where(Sequelize.col("Flights.DepartureAirportId"),"=",Sequelize.col("departure_airport.code"))
+    //                 },
+                   
+    //             },
+            
+                // adding arrival airportId details
+    //             {
+    //                 model: airports,
+    //                 required: true,
+    //                 as:'arrival_airport',
+    //                 On: {
+    //                    col1 : Sequelize.where(Sequelize.col("Flights.ArrivalAirportId"),"=",Sequelize.col("arrival_airport.code"))
+    //                 },
+                   
+    //             },
+    //     ]
+
+    //     });
+
+    //     console.log( "response :=>" + response.toString());
+
+    //     return response;
+
+        
+    // }
+
+
+
+
+    // 6. adding cities info too
     async getAllFlights(filter,sort) {
 
         console.log("Filter in repository:", filter);
@@ -91,31 +179,49 @@ class FlightRepository extends crudRepository{
             include :[
                 {
                 model:airplanes,
-                required : true
+                required : true,
+                as:'airplanes_details'
                 },
 
 
-                // this issue is comming
                 {
                     model: airports,
                     required: true,
+                    as:'departure_airport',
                     On: {
-                       col1 : Sequelize.where(Sequelize.col("Flights.DepartureAirportId"),"=",Sequelize.col("airports.code"))
+                       col1 : Sequelize.where(Sequelize.col("Flights.DepartureAirportId"),"=",Sequelize.col("departure_airport.code"))
+                    },
+
+                    include : {
+                        model:cities,
+                        required : true
                     }
-                }
+                   
+                },
+            
+                // adding arrival airportId details
+                {
+                    model: airports,
+                    required: true,
+                    as:'arrival_airport',
+                    On: {
+                       col1 : Sequelize.where(Sequelize.col("Flights.ArrivalAirportId"),"=",Sequelize.col("arrival_airport.code"))
+                    },
+                    include : {
+                        model:cities,
+                        required : true
+                    }
+                   
+                },
         ]
 
         });
-
         console.log( "response :=>" + response.toString());
 
-        return response;
-
-        
-    }
-
-
-
+            return response;
+    
+            
+        }
 
     
 }

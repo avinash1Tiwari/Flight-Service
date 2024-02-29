@@ -11,21 +11,47 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
     
+      // this.belongsTo(models.airplanes,{
+      //   foreignKey:'AirplaneId',
+      // })
+
+      // after adding alias
       this.belongsTo(models.airplanes,{
-        foreignKey:'AirplaneId'
+        foreignKey:'AirplaneId',
+        as:'airplanes_details'
       })
       
 
+      // this.belongsTo(models.airports,{
+      //   foreignKey:'DepartureAirportId', 
+      //   targetKey: 'code',
+      //   
+      // })
+
+      // after adding alias
       this.belongsTo(models.airports,{
         foreignKey:'DepartureAirportId', 
         targetKey: 'code',
+        as:'departure_airport'
       })
 
+      // this.belongsTo(models.airports,{
+      //   foreignKey:'ArrivalAirportId',
+      //   targetKey: 'code',
+      //  
+      // })
+
+
+      // after adding alias
       this.belongsTo(models.airports,{
         foreignKey:'ArrivalAirportId',
         targetKey: 'code',
+        as:'arrival_airport'
       })
     }
+
+
+    
   }
   Flights.init({
     FightNumber:{ 
