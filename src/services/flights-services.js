@@ -155,7 +155,7 @@ if(query.price){
     }
     catch(error){
 
-        console.log("error ka naam :" + error.name)
+        console.log("error ka naam =>:" + error)
         if(error.name == 'SequelizeValidationError')
         {
             let explaination = [];

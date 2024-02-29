@@ -1,4 +1,6 @@
-const {Flights,airplanes} = require('../models');
+const {Flights,airplanes,airports} = require('../models');
+
+const {Sequelize} = require('sequelize')
 const crudRepository = require('./crud-operations');
 
 class FlightRepository extends crudRepository{
@@ -48,34 +50,77 @@ class FlightRepository extends crudRepository{
 
     // 2. previosly we are making seperate query for each of query like(sort,date,price,etc) ,
     // mow with the help of joins we can make all query in single run
-    async getAllFlights(filter,sort) {
+    // async getAllFlights(filter,sort) {
 
         
+
+    //     console.log("Filter in repository:", filter);
+    //     const response = await Flights.findAll({
+    //         where: filter,
+    //         order : sort,
+    //         include :{
+    //             model:airplanes,
+    //             required : true
+    //         }
+
+    //     });
+
+    //     return response;
+        
+    // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // 4. 
+    async getAllFlights(filter,sort) {
 
         console.log("Filter in repository:", filter);
         const response = await Flights.findAll({
             where: filter,
             order : sort,
-            include :{
+            include :[
+                {
                 model:airplanes,
                 required : true
-            }
+                },
+
+
+                // this issue is comming
+                {
+                    model: airports,
+                    required: true,
+                    On: {
+                       col1 : Sequelize.where(Sequelize.col("Flights.DepartureAirportId"),"=",Sequelize.col("airports.code"))
+                    }
+                }
+        ]
 
         });
 
+        console.log( "response :=>" + response.toString());
+
         return response;
+
         
     }
+
+
+
+
+    
 }
 
-// console.log("djkk")
-
-// snkvml,,
-
-
-
-
-// console.log("sdj")
+// a discussion
 
 // with above inheritence , all things have been came 
 // from parent class, i.e, from crudRepository

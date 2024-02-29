@@ -18,15 +18,25 @@ module.exports = (sequelize, DataTypes) => {
       });
 
 
-      this.hasMany(models.Flights,{
-        foreignKey:'DepartureAirportId',
-        onDelete:'CASCADE'
-      })
+      // this.belongsTo(models.Flights,{
+      //   foreignKey:'DepartureAirportId',
+      //   onDelete:'CASCADE'
+      // })
 
-      this.hasMany(models.Flights,{
-        foreignKey:'ArrivalAirportId',
-        onDelete:'CASCADE'
-      })
+      // this.belongsTo(models.Flights,{
+      //   foreignKey:'ArrivalAirportId',
+      //   onDelete:'CASCADE'
+      // })
+
+      this.hasMany(models.Flights, {
+        foreignKey: 'DepartureAirportId',
+        onDelete: 'CASCADE'
+      });
+      
+      this.hasMany(models.Flights, {
+        foreignKey: 'ArrivalAirportId',
+        onDelete: 'CASCADE'
+      });
 
 
   
