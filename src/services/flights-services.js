@@ -177,7 +177,27 @@ if(query.price){
 
 
 
+
+async function getFlight(id){
+    try{
+
+        const flight = await flighttrepository.get(id);
+        return flight;
+    }
+    catch(error){
+        if(error.statusCode == StatusCodes.NOT_FOUND)
+        {
+            throw new AppError("The flight you have requested is not present",error.statusCode)
+        }
+        throw new AppError("Can not fetch the data of flight ",StatusCodes.INTERNAL_SERVER_ERROR)
+
+    }
+}
+
+
+
 module.exports ={
     createFlight,
-    getAllFlights
+    getAllFlights,
+    getFlight
 }
