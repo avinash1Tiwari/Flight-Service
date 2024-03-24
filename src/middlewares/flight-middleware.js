@@ -215,4 +215,26 @@ let isValid = compareTime(str1,str2)
     next();
 }
 
-module.exports = {validateCreateRequest};
+
+async function validateUpdateFlightSeat(req,res,next){
+    console.log("middleWare")
+   
+    if(!req.body.seats)
+    {
+       
+        ErrorResponse.message = "something went wrong while  updating an flight",
+
+        ErrorResponse.error = new AppError(["seats not found in the incomming request "],StatusCodes.BAD_REQUEST)
+
+        return res
+                  .status(StatusCodes.BAD_REQUEST)
+                  .json(ErrorResponse)
+    }
+
+    next();
+}
+
+module.exports = {
+    validateCreateRequest,
+    validateUpdateFlightSeat
+};

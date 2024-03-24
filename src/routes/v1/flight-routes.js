@@ -2,7 +2,8 @@ const express = require('express')
 
 const {FlightMiddlewares} = require('../../middlewares')
 
-const { FlightController} = require('../../controllers')
+const { FlightController} = require('../../controllers');
+const { FlightRepository } = require('../../repositories');
 
 const router = express.Router();
 
@@ -29,9 +30,14 @@ router.post('/',
  router.get('/',FlightController.getAllFlights);
 
 
-//   /api/v1/airplanes/id   GET
+//   /api/v1/flights/id   GET
 // req body = {}
 router.get('/:id',FlightController.getFlight)
+
+
+//   /api/v1/flights/:id/seats  PATCH
+router.patch('/:id/seats',FlightMiddlewares.validateUpdateFlightSeat,
+                        FlightController.updateFlightSeats)
 
 module.exports = router;
 

@@ -95,8 +95,40 @@ async function getFlight(req,res){
     }
 }
 
+
+async function updateFlightSeats(req,res){
+    console.log("controller bhai")
+    console.log("request body =>" + req.params.id)
+    try{
+
+        
+        const flight = await FlightServices.updateFlightSeats({
+            flightId : req.params.id,
+            seats:req.body.seats,
+            dec : req.body.dec
+        });
+        console.log("controller bhai try")
+        SuccessResponse.data = flight;
+
+        return res
+                  .status(StatusCodes.OK)
+                  .json(SuccessResponse)
+    }
+    catch(error){
+        console.log("controller bhai catch")
+        console.log(error.statusCode)
+
+            ErrorResponse.error = error;
+            return res
+                    .status(error.statusCode)
+                    .json(ErrorResponse);
+    }
+}
+
+
 module.exports = {
     createFlight,
     getAllFlights,
-    getFlight
+    getFlight,
+    updateFlightSeats
 }

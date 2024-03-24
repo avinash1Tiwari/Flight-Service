@@ -224,7 +224,7 @@ class FlightRepository extends crudRepository{
         }
 
     
-}
+
 
 // a discussion
 
@@ -234,7 +234,38 @@ class FlightRepository extends crudRepository{
 // we can write our custom operation function to 
 // perform some function on DB.
 
-module.exports =  FlightRepository
+
+
+async updateFlightSeats(flightId,seats,dec = true)
+{
+    // console.log("njnjj")
+    const flight = await Flights.findByPk(flightId);
+    // console.log("flight : " + flight.BoardingGate)
+
+    // console.log("parsing value => " + parseInt(dec))
+
+    
+    if(parseInt(dec))
+    {
+        console.log("inside try")
+        const response =   await flight.decrement('TotalSeats',{by:seats})
+        return response
+      
+    }
+    else{
+        console.log("inside catch")
+        const response =  await flight.increment('TotalSeats',{by:seats})
+          return response
+
+    }
+
+    // return flight
+}
+
+}
+module.exports = FlightRepository
+  
+    
 
 
     
