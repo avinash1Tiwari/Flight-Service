@@ -3,6 +3,10 @@ const {Flights,airplanes,airports,cities} = require('../models');
 const {Sequelize} = require('sequelize')
 const crudRepository = require('./crud-operations');
 
+const db = require('../models')
+
+// const re
+
 class FlightRepository extends crudRepository{
    
     constructor(){
@@ -244,7 +248,11 @@ async updateFlightSeats(flightId,seats,dec = true)
 
     // console.log("parsing value => " + parseInt(dec))
 
-    
+    // applying lock
+        // 1. using direct queries
+        db.sequelize.query(`SELECT * from Flights WHERE Flights.id = ${flightId} FOR UPDATE`)
+    // db.sequelize.query()
+
     if(parseInt(dec))
     {
         console.log("inside try")
