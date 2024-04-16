@@ -5,7 +5,7 @@ const crudRepository = require('./crud-operations');
 
 const db = require('../models')
 
-// const re
+const {addRowLockOnFlight} = require('./queries')
 
 class FlightRepository extends crudRepository{
    
@@ -250,10 +250,14 @@ async updateFlightSeats(flightId,seats,dec = true)
 
     // applying lock
         // 1. using direct queries
-        db.sequelize.query(`SELECT * from Flights WHERE Flights.id = ${flightId} FOR UPDATE`)
-    // db.sequelize.query()
+        // db.sequelize.query(`SELECT * from Flights WHERE Flights.id = ${flightId} FOR UPDATE`)
 
-    if(parseInt(dec))
+        // 2. added lock using seperate function
+           db.sequelize.query(addRowLockOnFlight(flightId))
+    
+        //    instead of parseint => you can use    +dec    => it will also work properly
+    // if(parseInt(dec))
+    if(+dec)
     {
         console.log("inside try")
         const response =   await flight.decrement('TotalSeats',{by:seats})

@@ -35,7 +35,12 @@ router.post('/',
 router.get('/:id',FlightController.getFlight)
 
 
+
+
+// update seat Api
 //   /api/v1/flights/:id/seats  PATCH
+// body = {dec = true, seats = 2}
+// localhost:3000/api/v1/flights/10/seats
 router.patch('/:id/seats',FlightMiddlewares.validateUpdateFlightSeat,
                         FlightController.updateFlightSeats)
 
