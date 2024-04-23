@@ -13,6 +13,16 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
 app.use('/api', apiRoutes);
+
+
+// taking request from API-Gateway, which acts as reverse-proxy
+app.get('/flightServices',(req,res)=>{
+    return res.json({msg : "what happened"})
+})
+// app.use('/flightServices/api', apiRoutes);
+
+
+
 // Logger.info("succesfully started the server ",{})
 
 app.listen(ServerConfig.PORT, async () => {
